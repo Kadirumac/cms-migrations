@@ -12,8 +12,16 @@ Provide these env variables: `SCRIVITO_BASE_URL`, `SCRIVITO_TENANT`, `SCRIVITO_A
 
 ```
 export SCRIVITO_BASE_URL=https://api.scrivito.com # or your Fiona 8 backend URL
-export SCRIVITO_TENANT=your_tenant_id
-export SCRIVITO_API_KEY=your_api_key
+export SCRIVITO_TENANT=
+export SCRIVITO_API_KEY=
+
+Trox Current
+export SCRIVITO_TENANT=trox
+export SCRIVITO_API_KEY=973e440afa5c185e1647fbc11fdfe27e
+
+Trox New Tenant
+export SCRIVITO_TENANT=9686a259f7dc0245c2234580617618ff
+export SCRIVITO_API_KEY=1100275b25a03e1db0066e36c13f932d
 ```
 
 ## Usage of the exporter
