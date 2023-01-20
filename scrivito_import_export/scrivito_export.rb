@@ -12,14 +12,14 @@ class ScrivitoExport
     raise "file '#{dir_name}' exists" if File.exist?(dir_name)
     FileUtils.mkdir_p(dir_name)
 
-    visibility_categories_response = api.get("visibility_categories") || {}
-    custom_visibility_categories = visibility_categories_response.fetch("results")
+    # visibility_categories_response = api.get("visibility_categories") || {}
+    # custom_visibility_categories = visibility_categories_response.fetch("results")
 
-    if custom_visibility_categories.present? 
-      File.open(File.join(dir_name, "custom_visibility_categories.json"), "w") do |file|
-        file.write(JSON.generate(custom_visibility_categories))
-      end
-    end
+    # if custom_visibility_categories.present? 
+    #   File.open(File.join(dir_name, "custom_visibility_categories.json"), "w") do |file|
+    #     file.write(JSON.generate(custom_visibility_categories))
+    #   end
+    # end
 
     obj_count = 0
     File.open(File.join(dir_name, "objs.json"), "w") do |file|
@@ -82,8 +82,12 @@ class ScrivitoExport
     before_published_rev_id = api.get("workspaces/published")["revision_id"]
     continuation = nil
     ids = []
-    begin
-      w = api.get("workspaces/published/objs/search", "continuation" => continuation)
+    begin    
+      w = api.get("workspaces/published/objs/search", "continuation" => continuation, "query" => [{ 
+        field:"_path",
+        operator: "starts_with",
+        value: "/website",
+      }])
       ids += w["results"].map {|r| r["id"]}
     end while (continuation = w["continuation"]).present?
     after_published_rev_id = api.get("workspaces/published")["revision_id"]
