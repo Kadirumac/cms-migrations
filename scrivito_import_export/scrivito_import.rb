@@ -13,10 +13,10 @@ class ScrivitoImport
     workspace_id = api.post("workspaces", "workspace" => { "title" => "loader (do not touch)"})["id"]
     puts("Created loader working copy #{workspace_id}")
     old_obj_ids = get_obj_ids(api, workspace_id)
-    puts("Deleting #{old_obj_ids.size} old objs")
-    old_obj_ids.each do |id|
-      api.delete("workspaces/#{workspace_id}/objs/#{id}")
-    end
+    # puts("Deleting #{old_obj_ids.size} old objs")
+    # old_obj_ids.each do |id|
+    #   api.delete("workspaces/#{workspace_id}/objs/#{id}")
+    # end
 
     puts("Creating objs")
     File.foreach(File.join(dir_name, "objs.json")).with_index do |line, line_num|
